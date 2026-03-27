@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brain Tumor Detection</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('img-preview').src = e.target.result;
+          document.getElementById('img-preview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function showSpinner() {
+      document.getElementById('spinner').style.display = 'flex';
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <button onclick="toggleTheme()" class="toggle-btn">🌓 Toggle Dark Mode</button>
+    <h1>🧠 Brain Tumor Detection</h1>
+    
+    <form method="POST" action="/predict" enctype="multipart/form-data" onsubmit="showSpinner()">
+      <label for="image">Choose or drag an image</label>
+      <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+      <img id="img-preview" style="display:none; max-width:300px; margin-top:10px;" />
+      <button type="submit">🔍 Analyze</button>
+    </form>
+
+    <div id="spinner" class="spinner">🔄 Analyzing...</div>
+
+    {% if label %}
+    <div class="result animate">
+      <h2>Prediction Result</h2>
+      <p><strong>Tumor Type:</strong> {{ label }}</p>
+      <div class="bar">
+        <div class="fill" style="width:{{ confidence }}%">{{ confidence }}%</div>
+      </div>
+      <img src="{{ image_path }}" alt="Uploaded Image" />
+    </div>
+    {% endif %}
+
+    <div class="info">
+      <h3>🧬 Tumor Types</h3>
+      <ul>
+        <li><strong>Glioma:</strong> Tumors from glial cells, can be aggressive.</li>
+        <li><strong>Meningioma:</strong> Usually benign, arise from brain membranes.</li>
+        <li><strong>No Tumor:</strong> No abnormality detected.</li>
+        <li><strong>Pituitary:</strong> Tumors in the pituitary gland, often hormonal.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

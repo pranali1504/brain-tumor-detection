@@ -1,0 +1,5 @@
+model/
+static/uploads/
+*.h5
+*.pt
+*.pkl

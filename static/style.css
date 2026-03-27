@@ -1,0 +1,105 @@
+:root {
+  --bg-light: #f0f0f0;
+  --bg-dark: #121212;
+  --text-light: #000;
+  --text-dark: #f0f0f0;
+  --accent: #4CAF50;
+  --error: #e74c3c;
+}
+
+[data-theme="light"] {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+[data-theme="dark"] {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease-in-out;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+input[type="file"] {
+  margin: 1rem 0;
+}
+
+button {
+  background-color: var(--accent);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 0.9rem;
+}
+
+.spinner {
+  display: none;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-top: 1rem;
+}
+
+.result.animate {
+  animation: fadeIn 1s ease-in-out;
+  margin-top: 2rem;
+}
+
+.bar {
+  width: 80%;
+  margin: 10px auto;
+  background-color: #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fill {
+  background-color: var(--accent);
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: white;
+}
+
+.info {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  img {
+    width: 100%;
+  }
+}
